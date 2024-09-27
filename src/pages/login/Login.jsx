@@ -2,7 +2,7 @@ import React , { useState } from 'react'
 import './Login.css'
 import assets from '../../assets/assets'
 import { signup } from '../../config/firebase'
-
+/*Ar*/
 const Login = () => {
 
     const [currState,setCurrState] = useState("Sign up");
