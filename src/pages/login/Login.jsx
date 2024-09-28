@@ -1,7 +1,7 @@
 import React , { useState } from 'react'
 import './Login.css'
 import assets from '../../assets/assets'
-import { signup } from '../../config/firebase'
+import { signup , login} from '../../config/firebase'
 /*Ar solved*/
 const Login = () => {
 
@@ -15,6 +15,9 @@ const Login = () => {
         if(currState === "Sign up"){
             signup(userName,email,password);
         }
+        else{
+            login(email,password);
+        }
     }
 
   return (
@@ -23,7 +26,7 @@ const Login = () => {
         <form onSubmit={onSubmitHandler} className="login-form">
             <h2>{currState}</h2>
            { currState === "Sign up" ? <input onChange={(e)=>setUserName(e.target.value)} value={userName} type="text" placeholder='Username' className="from-input" required />: null}
-             <input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" placeholder='Email address' className="from-input" required/>
+            <input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" placeholder='Email address' className="from-input" required/>
             <input onChange={(e)=>setPassword(e.target.value)} value={password} type="password" placeholder='Password' className="from-input" required/>
             <button type='submit'>{currState === "Sign up" ? "Create an account" : "Login now"}</button>
             <div className="login-term">

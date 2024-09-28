@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { getFirestore, setDoc } from "firebase/firestore";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, setDoc ,doc,collection} from "firebase/firestore";
 import { toast } from "react-toastify";
 
 const firebaseConfig = {
@@ -34,9 +34,29 @@ const signup = async (username,email,password) => {
             chatData:[]
         })
     } catch(error){
-        console.error(error)
-        toast.error(error.code)
+        console.error(error);
+        toast.error(error.code.split('/')[1].split('-').join(' '));
+        throw error;//changes made by codeium
     }
 }
 
-export {signup}
+const login = async (email,password) => {
+    try{
+        await signInWithEmailAndPassword(auth,email,password);
+    } catch(error){
+        console.error(error);
+        toast.error(error.code.split('/')[1].split('-').join(' '));
+      //  throw error;//changes made by codeium
+    }
+}
+
+const logout = async () => {
+    try{
+        await signOut(auth);
+    } catch(error){
+        console.error(error);
+        toast.error(error.code.split('/')[1].split('-').join(' '));
+    }
+}
+
+export {signup,login,logout,auth,db}
